@@ -130,7 +130,7 @@ int main(int argc, char** argv)
   idx_head.push_back(0);
 
   int tmp_label = lines[0].second;
-  int cnt = 1;
+  int cnt = 0;
 
   features = (float **) malloc(lines.size() * sizeof(float *));
   LOG(ERROR) << "Loading features...";
@@ -184,6 +184,7 @@ int main(int argc, char** argv)
   int count = 0;
   int idx_anchor, idx_pos, idx_neg;
 
+
   for (int i = 0; i < num_per_class.size(); ++i)
   {
   	int num = num_per_class[i];
@@ -195,7 +196,7 @@ int main(int argc, char** argv)
   	  idx_pos = idx_head[i] + rand() % num;
 
   	  if (idx_anchor == idx_pos)
-  		continue;
+  		  continue;
 
   	  float* feat_anchor = features[idx_anchor];
   	  float* feat_pos = features[idx_pos];
@@ -217,7 +218,7 @@ int main(int argc, char** argv)
         neg_cnt++;
         count++;
 
-        if(count % 10000 == 0)
+        if(count % 100000 == 0)
         {
           LOG(ERROR) << "anchor: " << idx_anchor << " pos: " 
             << idx_pos << " neg: " << idx_neg << " pos_scores: " 
