@@ -14,7 +14,7 @@
 #include "caffe/util/math_functions.hpp"
 #include "caffe/util/rng.hpp"
 
-#define DEBUG_WUHAO 1
+#define DEBUG 1
 #include "caffe/debugtool.hpp"
 #include <iostream>
 

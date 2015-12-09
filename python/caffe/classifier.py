@@ -25,6 +25,7 @@ class Classifier(caffe.Net):
         """
         caffe.Net.__init__(self, model_file, pretrained_file)
         self.set_phase_test()
+        self.set_device(1)
 
         if gpu:
             self.set_mode_gpu()

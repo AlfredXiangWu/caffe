@@ -45,11 +45,11 @@ static int get_file_size(const char *filename)
 }
 
 // read features
-static unsigned char * read_file_buffer(const char *filename, int *size)
+static float * read_file_buffer(const char *filename, int *size)
 {
   int fsize;
   FILE *fp;
-  unsigned char *pnchBuf = NULL;
+  float *pnchBuf = NULL;
 
   *size = 0;
 
@@ -59,7 +59,7 @@ static unsigned char * read_file_buffer(const char *filename, int *size)
 
   if((fp = fopen(filename, "rb")) != NULL )
   {
-    pnchBuf = (unsigned char *) malloc(fsize * sizeof(unsigned char));
+    pnchBuf = (float *) malloc(fsize * sizeof(float));
     fread(pnchBuf, fsize, 1, fp);
     fclose(fp);
   }
