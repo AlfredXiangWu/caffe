@@ -420,6 +420,7 @@ message LayerParameter {
   // copyed from https://github.com/wenwei202/caffe/blob/sfm
   optional SparsifyParameter sparsify_param = 513;
   optional SymmetricRectifyParameter symmetric_rectify_param = 514;
+  optional TripletSelectionParamter triplet_selection_param = 515;
 }
 
 // Message that stores parameters used to apply transformation
@@ -1564,4 +1565,9 @@ message SymmetricRectifyParameter {
   optional bool channel_shared = 2 [default = false];
   // minus L1 decay to bias threshold to larger value
   optional float thre_decay = 3 [default = 0.0];
+}
+
+message TripletSelectionParamter {
+  optional uint32 max_num = 1 [default = 1000];
+  optional float thr = 2 [default = 400];
 }
