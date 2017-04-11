@@ -95,10 +95,4 @@ public:
 INSTANTIATE_CLASS(DebugTool);
 } // namespace caffe
 
-
-
-
-
-
-
 #endif

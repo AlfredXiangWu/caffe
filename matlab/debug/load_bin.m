@@ -5,12 +5,12 @@ NAME_LEN = 240;
 dic = containers.Map;
 fid = fopen(fn, 'rb');
 while ~ feof(fid)
-%     name = fread(fid, NAME_LEN, '*char');
-%     if isempty(name)
-%         break;
-%     end
-%     name = deblank(name');
-%     disp(name);
+    name = fread(fid, NAME_LEN, '*char');
+    if isempty(name)
+        break;
+    end
+    name = deblank(name');
+    disp(name);
     dims = fread(fid, 4, 'int');
     dims = fliplr(dims');
     disp(dims);

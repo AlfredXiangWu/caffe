@@ -1,7 +1,6 @@
 #include <vector>
 
 #include "caffe/layers/conv_layer.hpp"
-#include "caffe/debugtool.hpp"
 
 namespace caffe {
 
