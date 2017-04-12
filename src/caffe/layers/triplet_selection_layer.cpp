@@ -67,6 +67,10 @@ void TripletSelectionLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
             Dtype score_pos = compute_L2_distance(feat_anchor, feat_pos, dim);
             // neg
             for(int k = 0; k < num; ++k) {
+                if(cnt >= max_num_ - 1) {
+                    //LOG(INFO) << "Max number of pairs: " << max_num_ << " out of "<< cnt << " pairs";
+                    break;
+                }
                 const Dtype* feat_neg = feat + (k*dim);
                 int label_neg   = static_cast<int>(label[k]);
                 if(label_anchor == label_neg)
@@ -74,21 +78,18 @@ void TripletSelectionLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& botto
                 Dtype score_neg = compute_L2_distance(feat_anchor, feat_neg, dim);
                 // std::cout << "pos: " << score_pos << " neg: " << score_neg << std::endl;
                 // std::cout << score_pos + thr_ << " " << (score_pos + thr_ > score_neg) << std::endl;
-                if(score_pos + thr_ > score_neg) {
+                if((score_pos + thr_ > score_neg) && (score_pos < score_neg)) {
                     // std::cout << "pair:" << i << " " << j << " " << k << std::endl;
                     idx_anc.push_back(i);
                     idx_pos.push_back(j);
                     idx_neg.push_back(k);
                     cnt++;
                 }
-
-                if(cnt >= max_num_ - 1) 
-                    break;
             } // for(int k =0; k < num; ++k)
         } //for(int j = i + 1; j < num; ++j) 
     } // for(int i = 0; i < num; ++i)
 
-    //LOG(INFO) << "Selected triplet pairs: " << idx_anc.size();
+    // LOG(INFO) << "Selected triplet pairs: " << idx_anc.size();
 
     for(int i = 0; i < idx_anc.size(); ++i) {
         caffe_copy<Dtype>(dim, feat+idx_anc[i]*dim, top[0]->mutable_cpu_data()+i*dim);
